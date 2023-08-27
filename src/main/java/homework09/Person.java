@@ -26,19 +26,16 @@ public class Person {
         setAge(egn);
         this.country = country;
     }
-
     private void setAge(String egn) {
         String birthYear = "19" + egn.substring(0, 2);
         int currentYear = LocalDate.now().getYear();
         this.age = currentYear - Integer.parseInt(birthYear);
     }
-
     private void setBirthDate(String egn) {
         String month = egn.substring(2, 4);
         String date = egn.substring(4, 6);
         this.birthDate = month + "-" + date;
     }
-
     private void setEgn(String egn) {
         if (egn.length() == 10 && containsOnlyDigits(egn)) {
             this.egn = egn;
@@ -46,7 +43,6 @@ public class Person {
             throw new RuntimeException("The provided EGN is not valid! The EGN must contain only 10 digits!");
         }
     }
-
     private boolean containsOnlyDigits(String str) {
         try {
             Long.parseLong(str);
@@ -55,7 +51,6 @@ public class Person {
             return false;
         }
     }
-
 
     private void setSex(String sex) {
         try {

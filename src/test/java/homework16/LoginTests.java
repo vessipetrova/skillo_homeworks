@@ -14,14 +14,12 @@ import java.time.Duration;
 
 public class LoginTests {
     private WebDriver driver;
-
     @BeforeSuite
     protected final void setupTestSuite() {
         WebDriverManager.chromedriver().setup();
         WebDriverManager.firefoxdriver().setup();
         WebDriverManager.edgedriver().setup();
     }
-
     @BeforeMethod
     protected final void setUpTest() {
         this.driver = new ChromeDriver();
@@ -29,23 +27,20 @@ public class LoginTests {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
-
     @AfterMethod
     protected final void tearDownTest() {
         if (this.driver != null) {
             this.driver.quit();
         }
     }
-
     @DataProvider(name = "getUsers")
     public Object[][] getUsers() {
-        return new Object[][]{{"DimitarTarkalanov", "Dimitar1.Tarkalanov1", "DimitarTarkalanov"}, //login with username
-                {"testMail1@gmail.com", "Dimitar1.Tarkalanov1", "DimitarTarkalanov"}, //login with email
-                {"testAdmin@gmail.com", "Admin1.User1", "AdminUser"}, //login with admin user
-                {"manager@gmail.com", "Manager1.Use1", "ManagerUser"} //login with manager user
+        return new Object[][]{{"realtester", "123456", "realtester"},
+                {"realtester@yopmail.com", "123456", "realtester"},
+                //tests fail with 2nd user credentials, because they are invalid;
+                // there's a Bug in the SKILLO system which doesn't allow new user registration
         };
     }
-
     @Test(dataProvider = "getUsers")
     public void testLogin(String user, String password, String name) {
         HomePage homePage = new HomePage(driver);

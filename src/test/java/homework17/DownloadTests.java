@@ -7,7 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
-
 public class DownloadTests extends TestObject {
     @Test
     public void testDownload() throws InterruptedException {
@@ -20,7 +19,6 @@ public class DownloadTests extends TestObject {
         File file = new File(DOWNLOAD_DIR.concat(fileName));
         Assert.assertTrue(isFileDownloaded(file), "The file is not downloaded!");
     }
-
     private boolean isFileDownloaded(File file) throws InterruptedException {
         int waitTime = 20;
         int counter = 0;
@@ -32,7 +30,6 @@ public class DownloadTests extends TestObject {
             Thread.sleep(1000);
             counter++;
         }
-
         return false;
     }
 }

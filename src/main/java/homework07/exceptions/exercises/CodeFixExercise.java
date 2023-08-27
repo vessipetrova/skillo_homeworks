@@ -19,23 +19,6 @@ public class CodeFixExercise {
             fileWriter.write(text + "\n");
         }
     }
-
-    /**
-     * filePath - "src/lecture07/exceptions/testFile.txt" (existing file)
-     * filePath - "src/lecture07/exceptions/testFile.txt" (file in use by another program example: notepad)
-     * filePath - "test" (not existing file)
-     * filePath - "" (no file path specified)
-     * howManyTimesToPrintTheTextToFile - "-1"
-     * howManyTimesToPrintTheTextToFile - "0"
-     * howManyTimesToPrintTheTextToFile - "1"
-     * howManyTimesToPrintTheTextToFile - "2" (any number bigger than 1)
-     * howManyTimesToPrintTheTextToFile - "" (empty)
-     * textToAdd - "a" (1 char)
-     * textToAdd - "test" (single word)
-     * textToAdd - "test add text" (multiple words)
-     * textToAdd - "test1$" (alphabetic, numeric, and special symbols)
-     * textToAdd - "" (empty)
-     */
     public static void main(String[] args) throws IOException {
         FileWriter fileWriter = null;
         try {

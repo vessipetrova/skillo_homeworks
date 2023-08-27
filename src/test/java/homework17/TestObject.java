@@ -35,7 +35,6 @@ public class TestObject {
         WebDriverManager.firefoxdriver().setup();
         WebDriverManager.edgedriver().setup();
     }
-
     @BeforeMethod
     protected final void setUpTest() {
         this.driver = new ChromeDriver(configChromeOptions());
@@ -43,18 +42,15 @@ public class TestObject {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
-
     @AfterMethod
     protected final void tearDownTest(ITestResult testResult) {
         takeScreenshot(testResult);
         quitDriver();
     }
-
     @AfterSuite
     public void deleteDownloadedFiles() throws IOException {
         cleanDirectory(DOWNLOAD_DIR);
     }
-
     private void cleanDirectory(String directoryPath) throws IOException {
         File directory = new File(directoryPath);
 
@@ -68,7 +64,6 @@ public class TestObject {
             System.out.printf("Unable to delete the files in Directory:%s%n", directoryPath);
         }
     }
-
     private void takeScreenshot(ITestResult testResult) {
         if (ITestResult.FAILURE == testResult.getStatus()) {
             try {
@@ -80,19 +75,15 @@ public class TestObject {
                 System.out.println("Unable to create a screenshot file: " + e.getMessage());
             }
         }
-
     }
-
     private void quitDriver() {
         if (this.driver != null) {
             this.driver.quit();
         }
     }
-
     protected WebDriver getDriver() {
         return driver;
     }
-
     private ChromeOptions configChromeOptions() {
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("download.default_directory", System.getProperty("user.dir").concat("\\").concat(DOWNLOAD_DIR));

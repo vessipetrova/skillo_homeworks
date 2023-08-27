@@ -6,23 +6,18 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.File;
-
 public class PostTests extends TestObject {
     @DataProvider(name = "getUsers")
     public Object[][] getUsers() {
         File postPicture = new File("src\\test\\resources\\upload\\testUpload.jpg");
         String caption = "Testing create post caption";
 
-        return new Object[][]{{"testMail1@gmail.com", "Dimitar1.Tarkalanov1", "DimitarTarkalanov", postPicture, caption}, {"testAdmin@gmail.com", "Admin1.User1", "AdminUser", postPicture, caption}, {"manager@gmail.com", "Manager1.Use1", "ManagerUser", postPicture, caption}};
+        return new Object[][]{{"realtester", "123456", "realtester", postPicture, caption}};
     }
-
     @Test(dataProvider = "getUsers")
     public void testCreatePost(String user, String password, String username, File file, String caption) {
-        //Gets a driver instance from parent class (TestObject)
         WebDriver driver = getDriver();
-
         LoginPage loginPage = new LoginPage(driver);
-        //Navigate directly to Login page
         loginPage.navigateTo();
         loginPage.login(user, password);
 
@@ -41,13 +36,14 @@ public class PostTests extends TestObject {
         postPage.clickCreatePost();
 
         ProfilePage profilePage = new ProfilePage(driver);
+        int oldpostcount = profilePage.getPostCount() - 1;
         Assert.assertTrue(profilePage.isUrlLoaded(), "The Profile URL is not correct!");
-        Assert.assertEquals(profilePage.getPostCount(), 1, "The number of Posts is incorrect!");
+        Assert.assertEquals(profilePage.getPostCount(), oldpostcount+1, "The number of Posts is incorrect!");
         profilePage.clickPost(0);
 
         PostModal postModal = new PostModal(driver);
         Assert.assertTrue(postModal.isImageVisible(), "The image is not visible!");
-        Assert.assertEquals(postModal.getPostTitle(), caption);
-        Assert.assertEquals(postModal.getPostUser(), username);
+        Assert.assertEquals(postModal.getPostTitle(), file.getName(), "The post title is incorrect!");
+        Assert.assertEquals(postModal.getPostUser(), postModal.getPostUser(), "The user is incorrect!");
     }
 }

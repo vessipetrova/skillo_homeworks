@@ -5,9 +5,6 @@ public class Employee {
     private String lastName;
     private int birthYear;
 
-    public Employee() {
-    }
-
     public Employee(String firstName, String lastName, int birthYear) {
         this.firstName = firstName;
         this.lastName = lastName;

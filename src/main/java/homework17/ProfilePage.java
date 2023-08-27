@@ -10,11 +10,14 @@ import java.time.Duration;
 import java.util.List;
 
 public class ProfilePage {
-    public static final String PAGE_URL = "http://training.skillo-bg.com:4300/users/";
+    public static final String PAGE_URL = "http://training.skillo-bg.com:4300/users/3974";
     private final WebDriver driver;
 
     public ProfilePage(WebDriver driver) {
         this.driver = driver;
+    }
+    public void navigateTo() {
+        driver.get("http://training.skillo-bg.com:4300/users/3974");
     }
 
     public String getUsername() {
